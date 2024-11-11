@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package distributed_mutex;
+
+option go_package = "assignment4/protobuf/mutex";
+
+// protoc --go_out=. --go-grpc_out=. assignment4/protobuf/mutex/mutex.proto
+
+service MutexService {
+  rpc RequestAccess(Request) returns (Response); // request access to the Critical Section
+}
+
+message Request {
+  int32 timestamp = 1;
+  int32 node_id = 2;
+}
+
+message Response {
+  bool granted = 1;
+  int32 timestamp = 2;
+}
